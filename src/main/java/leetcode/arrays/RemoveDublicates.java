@@ -21,8 +21,7 @@ public class RemoveDublicates {
     public static void task1() {
 
         int[] arr = new int[]{1, 1, 2};
-        System.out.println(removeDuplicatesCorrect(arr));
-        //System.out.println(Arrays.toString(arr));
+        System.out.println(removeDuplicates(arr));
     }
 
 
@@ -49,27 +48,34 @@ public class RemoveDublicates {
     }
 
 
-
-    public static int removeDuplicates(int[] nums) {
-
-        int[] output = new int[nums.length];
-
+  // System.out.println(Arrays.toString(Arrays.copyOfRange(nums,0,outputIterator)));
+    public static int removeDuplicatesNew(int[] nums) {
+        if (nums.length == 0) return 0;
         int last = nums[0];
-
         int outputIterator = 1;
-        output[0] = nums[0];
         for (int i = 1; i < nums.length; i++) {
             if (last != nums[i]) {
                 last = nums[i];
-                output[outputIterator] = nums[i];
+                nums[outputIterator] = nums[i];
                 outputIterator++;
             }
         }
 
+        return outputIterator;
+    }
+
+    public static int removeDuplicates(int[] nums) {
+        int j = 0;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[j] != nums[i]) {
+               j++;
+               nums[j]= nums[i];
+            }
+        }
 
 
-        System.out.println(Arrays.toString(Arrays.copyOfRange(output,0,outputIterator)));
+        System.out.println(Arrays.toString(Arrays.copyOfRange(nums,0,j+1)));
 
-        return outputIterator ;
+        return j ;
     }
 }
