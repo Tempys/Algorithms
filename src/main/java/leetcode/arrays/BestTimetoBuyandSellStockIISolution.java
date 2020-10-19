@@ -39,8 +39,8 @@ public class BestTimetoBuyandSellStockIISolution {
         System.out.println(task1());
     }
 
-    public static int task1(){
-        int[] a = new int[] {7,1,5,3,6,4};
+    public static int task1() {
+        int[] a = new int[]{7, 1, 5, 3, 6, 4};
         return maxProfit(a);
     }
 
@@ -58,8 +58,13 @@ public class BestTimetoBuyandSellStockIISolution {
                 }
             } else {
 
-                    profit += (prices[i] - price);
-                    isBuy = true;
+                profit += (prices[i] - price);
+                isBuy = true;
+
+                if (i+1 != prices.length) {
+                    price = prices[i + 1];
+                }
+
 
             }
         }
