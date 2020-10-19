@@ -36,7 +36,11 @@ public class BestTimetoBuyandSellStockIISolution {
 
 
     public static void main(String[] args) {
-        System.out.println(task1());
+//        System.out.println(task1());
+        System.out.println(task2());
+//        System.out.println(task3());
+//        System.out.println(task4());
+//        System.out.println(task5());
     }
 
     public static int task1() {
@@ -44,30 +48,65 @@ public class BestTimetoBuyandSellStockIISolution {
         return maxProfit(a);
     }
 
+    public static int task2() {
+        int[] a = new int[]{1, 2, 3, 4, 5};
+        return maxProfit(a);
+    }
+
+    public static int task3() {
+        int[] a = new int[]{7, 6, 4, 3, 1};
+        return maxProfit(a);
+    }
+
+
+    public static int task4() {
+        int[] a = new int[]{6, 1, 3, 2, 4, 7};
+        return maxProfit(a);
+    }
+
+    public static int task5() {
+        int[] a = new int[]{1, 2};
+        return maxProfit(a);
+    }
+
+
+    public static int maxProfitOptimal(int[] prices) {
+
+    }
+
     public static int maxProfit(int[] prices) {
         int profit = 0;
-        int price = prices[0];
+        int price = 0;
         boolean isBuy = true;
-        for (int i = 1; i < prices.length; i++) {
 
-            if (price > prices[i]) {
+        for (int i = 0; i < prices.length; i++) {
 
-                if (isBuy) {
-                    price = prices[i];
-                    isBuy = false;
+            if (i + 1 != prices.length && prices[i] > prices[i + 1] && isBuy) {
+
+                price = prices[++i];
+                isBuy = false;
+
+            } else if (isBuy) {
+
+                price = prices[i];
+                isBuy = false;
+
+
+            } else if (!isBuy && prices[i] > price) {
+
+                if (i + 2 == prices.length - 1 && prices[i + 1] < prices[i + 2]) {
+                    profit += (prices[i + 1] - price);
+                    i++;
+                } else {
+                    profit += (prices[i] - price);
                 }
-            } else {
 
-                profit += (prices[i] - price);
                 isBuy = true;
-
-                if (i+1 != prices.length) {
-                    price = prices[i + 1];
-                }
-
-
             }
+
+
         }
+
         return profit;
 
     }
