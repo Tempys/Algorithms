@@ -36,21 +36,21 @@ public class BestTimetoBuyandSellStockIISolution {
 
 
     public static void main(String[] args) {
-//        System.out.println(task1());
+        System.out.println(task1());
         System.out.println(task2());
-//        System.out.println(task3());
-//        System.out.println(task4());
-//        System.out.println(task5());
+        System.out.println(task3());
+        System.out.println(task4());
+        System.out.println(task5());
     }
 
     public static int task1() {
         int[] a = new int[]{7, 1, 5, 3, 6, 4};
-        return maxProfit(a);
+        return maxProfitRecursion(a);
     }
 
     public static int task2() {
         int[] a = new int[]{1, 2, 3, 4, 5};
-        return maxProfit(a);
+        return maxProfitRecursion(a);
     }
 
     public static int task3() {
@@ -66,13 +66,39 @@ public class BestTimetoBuyandSellStockIISolution {
 
     public static int task5() {
         int[] a = new int[]{1, 2};
-        return maxProfit(a);
+        return maxProfitRecursion(a);
     }
 
 
-    public static int maxProfitOptimal(int[] prices) {
-
+    public static int maxProfitRecursion(int[] prices) {
+        return calculate(prices, 0);
     }
+
+    public static int calculate(int prices[], int s) {
+        int max = 0;
+        if (s == prices.length) {
+            return 0;
+        }
+
+        for (int start = s; start < prices.length; start++) {
+            int maxProfit = 0;
+            for (int i = start + 1; i < prices.length; i++) {
+                if (prices[start] < prices[i]) {
+                    int profit = calculate(prices, i + 1) + prices[i] - prices[start];
+                    if (maxProfit < profit) {
+                        maxProfit = profit;
+                    }
+                }
+            }
+
+            if (max < maxProfit) {
+                max = maxProfit;
+            }
+        }
+
+        return max;
+    }
+
 
     public static int maxProfit(int[] prices) {
         int profit = 0;
@@ -112,3 +138,5 @@ public class BestTimetoBuyandSellStockIISolution {
     }
 
 }
+
+
