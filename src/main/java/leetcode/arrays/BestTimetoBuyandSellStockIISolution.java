@@ -37,15 +37,15 @@ public class BestTimetoBuyandSellStockIISolution {
 
     public static void main(String[] args) {
         System.out.println(task1());
-        System.out.println(task2());
-        System.out.println(task3());
-        System.out.println(task4());
-        System.out.println(task5());
+//        System.out.println(task2());
+//        System.out.println(task3());
+//        System.out.println(task4());
+//        System.out.println(task5());
     }
 
     public static int task1() {
         int[] a = new int[]{7, 1, 5, 3, 6, 4};
-        return maxProfitRecursion(a);
+        return maxProfit2(a);
     }
 
     public static int task2() {
@@ -99,7 +99,6 @@ public class BestTimetoBuyandSellStockIISolution {
         return max;
     }
 
-
     public static int maxProfit(int[] prices) {
         int profit = 0;
         int price = 0;
@@ -135,6 +134,24 @@ public class BestTimetoBuyandSellStockIISolution {
 
         return profit;
 
+    }
+
+
+    public static int maxProfit2(int[] prices) {
+        int i = 0;
+        int valley = prices[0];
+        int peak = prices[0];
+        int maxprofit = 0;
+        while (i < prices.length - 1) {
+            while (i < prices.length - 1 && prices[i] >= prices[i + 1])
+                i++;
+            valley = prices[i];
+            while (i < prices.length - 1 && prices[i] <= prices[i + 1])
+                i++;
+            peak = prices[i];
+            maxprofit += peak - valley;
+        }
+        return maxprofit;
     }
 
 }
