@@ -37,53 +37,105 @@ import java.util.Arrays;
 public class RotateArray {
 
     public static void main(String[] args) {
-        System.out.println( Arrays.toString(task6()));
+        System.out.println(Arrays.toString(task7()));
+
     }
 
-    private static int[] task1(){
-        int[] a = new int[] {1,2,3,4,5,6,7};
-        rotate1(a,3);
+    private static int[] task1() {
+        int[] a = new int[]{1, 2, 3, 4, 5, 6, 7};
+        rotate1(a, 3);
         return a;
     }
 
-    private static int[] task2(){
-        int[] a = new int[] {-1,-100,3,99};
-        rotate1(a,2);
+    private static int[] task2() {
+        int[] a = new int[]{-1, -100, 3, 99};
+        rotate1(a, 2);
         return a;
     }
 
-    private static int[] task4(){
-        int[] a = new int[] {-1};
-        rotate1(a,1);
+    private static int[] task4() {
+        int[] a = new int[]{-1};
+        rotate1(a, 1);
         return a;
     }
 
-    private static int[] task5(){
-        int[] a = new int[] {1,2};
-        rotate1(a,4);
+    private static int[] task5() {
+        int[] a = new int[]{1, 2};
+        rotate1(a, 4);
         return a;
     }
 
-    private static int[] task6(){
-        int[] a = new int[] {1,2,3};
-        rotate1(a,4);
+    private static int[] task6() {
+        int[] a = new int[]{1, 2, 3};
+        rotate1(a, 4);
         return a;
     }
 
-    public void rotate(int[] nums, int k) { }
+    private static int[] task7() {
+        int[] a = new int[]{1, 2, 3, 4, 5};
+        rotateWithCyclicReplacements(a, 2);
+        return a;
+    }
+
+    public void rotate(int[] nums, int k) {
+    }
 
     public static void rotate1(int[] nums, int k) {
-        if(k > nums.length) k = k- nums.length;
+        if (k > nums.length) k = k - nums.length;
 
         int[] rotatesPart = Arrays.copyOfRange(nums, nums.length - k, nums.length);
 
         for (int i = nums.length - 1; i >= 0; i--) {
-            if(i-k < 0) { break; }
-          //  System.out.println(nums[i-k] +" "+ (i-k) +"  "+ i);
-            nums[i]= nums[i-k];
+            if (i - k < 0) {
+                break;
+            }
+            //  System.out.println(nums[i-k] +" "+ (i-k) +"  "+ i);
+            nums[i] = nums[i - k];
         }
 
-        System.arraycopy(rotatesPart,0,nums,0,rotatesPart.length);
+        System.arraycopy(rotatesPart, 0, nums, 0, rotatesPart.length);
+
+
+    }
+
+    public static void rotate2(int[] nums, int k) {
+        k = k % nums.length;
+        int count = 0;
+        for (int start = 0; count < nums.length; start++) {
+            int current = start;
+            int prev = nums[start];
+            do {
+                int next = (current + k) % nums.length;
+                int temp = nums[next];
+                nums[next] = prev;
+                prev = temp;
+                current = next;
+                count++;
+            } while (start != current);
+        }
+
+
+    }
+
+    public static void rotateWithCyclicReplacements(int[] nums, int k) {
+        k = k % nums.length;
+        int count = 0;
+
+        for (int start = 0; count < nums.length; start++) {
+            int prev = nums[start];
+            int current = start;
+            do {
+
+                int next = (current + k) % nums.length;
+                int temp = nums[next];
+                nums[next] = prev;
+                prev = temp;
+                current = next;
+                count++;
+
+            } while (start != current);
+
+        }
 
 
     }
